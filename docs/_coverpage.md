@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-![logo](/blog.svg)
+![logo](./_media/blog.svg)
 # 乔治的Blog
 
 > ✍️✍️✍️记录个人的学习笔记、心得体会
