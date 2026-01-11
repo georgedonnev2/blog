@@ -1,5 +1,7 @@
-_site
-.sass-cache
-.jekyll-cache
+
+# Jekyll 生成的文件
+_site/
+.jekyll-cache/
 .jekyll-metadata
-vendor
+
+# 构建输出目录（docs 需要提交，所以不加 docs/）
