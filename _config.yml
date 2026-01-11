@@ -9,11 +9,33 @@ repository: georgedonnev2/log
 
 # 新增：指定构建输出目录
 destination: ./docs
-# baseurl: "/log"
-# url: "https://georgedonnev2.github.io"
+baseurl: "/log"
+url: "https://georgedonnev2.github.io"
+
+
 
 # 构建配置
 markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false
+
+# 排除不需要的文件（本地构建时就不会生成到 ./docs 目录中）
+exclude:
+  - docker-compose.yml
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - node_modules/
+  - .git/
+  - .github/
+
+# 可选：禁用 GitHub metadata 以避免错误
+# github: [metadata]  # 如果出现 metadata 错误可以启用
+
+# 禁用其他主题的自动安装
+# safe: true
+
+# 设置时区
+timezone: Asia/Shanghai
