@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Hello Jekyll 4.2.2! hhhhhhhhh
+# Hello Jekyll 4.2.2! 
 
 This site is running with:
 - ✅ Jekyll 4.2.2 via Docker latest
@@ -54,6 +54,7 @@ Jekyll 是一个用 Ruby 编写的开源静态站点生成器，它将纯文本�
 
 🎯 核心理念
 Jekyll 遵循“内容优先”的理念，让你专注于写作而非技术细节。它使用简单的 Markdown、HTML 和 Liquid 模板语言，将源文件转换为完全静态的 HTML 站点，无需数据库或复杂的服务器环境。
+
 
 
 ---

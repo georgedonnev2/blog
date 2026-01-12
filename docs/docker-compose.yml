@@ -8,10 +8,10 @@ services:
     volumes:
       - ~/gdweb/blog/docs:/srv/jekyll
       # - bundle_data:/usr/local/bundle  # 使用命名卷保存 gems
-    environment:
+    # environment:
       # 新增：设置 GitHub Pages 环境
-      JEKYLL_ENV: production
-      PAGES_REPO_NWO: "georgedonnev2/blog"
+      # JEKYLL_ENV: production
+      # PAGES_REPO_NWO: "georgedonnev2/blog"
       # BUNDLE_PATH: "/usr/local/bundle"  # 指定 bundle 安装路径
     # command: jekyll serve --host 0.0.0.0 --watch --force_polling
     command: >
