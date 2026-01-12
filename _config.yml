@@ -5,11 +5,11 @@ plugins:
 
 title: mySite4Test # 增加title 否则报错
 description: 测试 Primer theme # 增加 description 否则报错
-repository: georgedonnev2/log
+repository: georgedonnev2/blog
 
 # 新增：指定构建输出目录
 destination: ./docs
-baseurl: "/log"
+baseurl: "/blog"
 url: "https://georgedonnev2.github.io"
 
 

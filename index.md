@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Hello Jekyll 4.2.2!
+# Hello Jekyll 4.2.2! hhhhhhhhh
 
 This site is running with:
 - ✅ Jekyll 4.2.2 via Docker latest
@@ -31,6 +31,30 @@ This site is running with:
 - **Ruby version**: 3.1.1
 - **Docker image**: jekyll/jekyll:latest
 - **Theme**: Primer via remote_theme
+
+## 测试链接
+
+### 链接1
+
+[About](about)
+
+### 链接2
+
+[c1](./ailab/c1)
+
+### link3
+
+[preadme11](./preadme)
+
+## 测试文字
+
+Jekyll：简洁高效的静态站点生成引擎
+
+Jekyll 是一个用 Ruby 编写的开源静态站点生成器，它将纯文本内容转换为功能齐全的静态网站。自 2008 年由 GitHub 联合创始人 Tom Preston-Werner 创建以来，它已成为许多开发者、技术博客和项目文档的首选工具。
+
+🎯 核心理念
+Jekyll 遵循“内容优先”的理念，让你专注于写作而非技术细节。它使用简单的 Markdown、HTML 和 Liquid 模板语言，将源文件转换为完全静态的 HTML 站点，无需数据库或复杂的服务器环境。
+
 
 ---
 
