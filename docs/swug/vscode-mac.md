@@ -8,4 +8,4 @@ layout: default
 
 ## 设置 workspace
 
-创建一个目录用于测试 C 程序
+创建一个目录用于测试 C 程序。比如 `~/nfh`
