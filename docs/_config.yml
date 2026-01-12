@@ -8,8 +8,8 @@ description: 测试 Primer theme # 增加 description 否则报错
 repository: georgedonnev2/blog
 
 # 关键：指定源文件目录和输出目录
-source: ./docs         # 从 docs 目录读取 markdown 文件
-destination: ./_site   # 构建输出到 _site 目录
+# source: ./docs         # 从 docs 目录读取 markdown 文件
+# destination: ./_site   # 构建输出到 _site 目录
 baseurl: "/blog"
 url: "https://georgedonnev2.github.io"
 

@@ -2,11 +2,11 @@
 services:
   jekyll:
     image: jekyll/jekyll:latest
-    container_name: myblog  # 容器名称
+    container_name: gdv2blog  # 容器名称
     ports:
       - "4000:4000"
     volumes:
-      - ~/gdweb/blog:/srv/jekyll
+      - ~/gdweb/blog/docs:/srv/jekyll
       # - bundle_data:/usr/local/bundle  # 使用命名卷保存 gems
     environment:
       # 新增：设置 GitHub Pages 环境
@@ -17,6 +17,12 @@ services:
     command: >
       sh -c "
       cd /srv/jekyll &&
-      jekyll build --destination ./_site &&
+      jekyll build &&
       jekyll serve --host 0.0.0.0 --watch --force_polling
       "
+    # command: >
+    #   sh -c "
+    #   cd /srv/jekyll &&
+    #   jekyll build --destination ./_site &&
+    #   jekyll serve --host 0.0.0.0 --watch --force_polling
+    #   "
