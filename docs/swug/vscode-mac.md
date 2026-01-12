@@ -12,6 +12,8 @@ layout: default
 
 ## 编写 C 程序
 
+用 VSCode 编写如下 C 程序
+
 ```c
 #include <stdio.h>
 #include <string.h>
