@@ -44,7 +44,7 @@ This site is running with:
 
 ### link3
 
-[preadme11](./preadme)
+[preadme](./preadme.md)
 
 ## 测试文字
 

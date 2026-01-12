@@ -17,6 +17,6 @@ services:
     command: >
       sh -c "
       cd /srv/jekyll &&
-      jekyll build --destination ./docs &&
+      jekyll build --destination ./_site &&
       jekyll serve --host 0.0.0.0 --watch --force_polling
       "
