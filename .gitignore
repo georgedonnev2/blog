@@ -4,6 +4,9 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 
+CNAME
+
+
 # 忽略根目录(本机~/gdweb/log)的以下子目录，
 # 因为构建时会输出到本机的 ~/gdweb/log/docs/ 下面
 # 可检查忽略是否符合预期：git check-ignore -v docs/ailab/c1.html
