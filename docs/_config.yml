@@ -3,8 +3,8 @@ remote_theme: pages-themes/primer@v0.6.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 
-title: mySite4Test # 增加title 否则报错
-description: 测试 Primer theme # 增加 description 否则报错
+title: George Donne's Blog # 增加title 否则报错
+description: George Donne's Blog # 增加 description 否则报错
 repository: georgedonnev2/blog
 
 # 关键：指定源文件目录和输出目录

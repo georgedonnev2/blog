@@ -1,5 +1,6 @@
 ---
 layout: default
+title: VSCode 在 MacOS 上的使用建议
 ---
 
 # VSCode 在 MacOS 上的使用建议
@@ -13,6 +14,8 @@ layout: default
 ## 编写 C 程序
 
 用 VSCode 编写如下 C 程序。复制以下样例代码，并保存文件
+
+测试你好！
 
 ```c
 #include <stdio.h>

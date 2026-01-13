@@ -1,14 +1,15 @@
 ---
 layout: default
+title: 基于 Docker 的 Jekyll 本地预览网站
 ---
 
-# Jekyll 本地测试
+# 基于 Docker 的 Jekyll 本地预览网站
 
 想到能否用 docker 运行 Jekyll。因为以前尝试 Jekyll 本地预览时，要装这装那。尤其是 Ruby 版本和 macOS 自带的 Ruby 还不一样，安装过程很折腾。咨询大模型后可行，就开始测试！
 
 ## 添加国内仓库源
 
-参考资料增加了国内仓库源。添加完成后的配置文件如下：
+参考 B 站资料 [^1] 增加了国内仓库源。添加完成后的配置文件如下：
 
 ```yaml
 {
@@ -31,6 +32,9 @@ layout: default
 }
 ```
 
+主要是添加在 `registry-mirrors` 下面，其余信息维持原样没有改动。
+
+<!--  -->
 ## 拉取镜像
 
 咨询大模型后，得到拉取镜像命令如下：
@@ -44,6 +48,8 @@ docker pull jekyll/jekyll:latest
 REPOSITORY      TAG       IMAGE ID       CREATED         SIZE
 jekyll/jekyll   latest    3c7afda80cab   3 years ago     829MB
 ```
+
+
 
 ## 运行容器
 
@@ -122,7 +128,144 @@ git commit -m "1st commit"
 git push -u origin master
 ```
 
-## 使用 jekyll-primer-spec 主题
+## 使用 primer 主题
+
+大致使用以下信息和大模型做交互：
+```md
+1、用docker-compose运行jekyll latest
+2、使用 primer 主题。不适用默认的minima主题
+3、docker的持久化目录在 ~/gdweb/blog。而不是日志在 ~/gdweb/blog
+4、本地可预览
+5、github pages上，仓库是 georgedonnev2/blog ，网站内容在 /docs
+6、最精简的配置，先跑起来。
+7、只有一个 index.md
+```
+
+### 主要文件内容
+
+在 github.com 上，网站内容放在仓库的 `/docs` 中。在  Github Pages 中有相关设置的，此处从略。因此折腾了几次，最终可运行以后的目录结构大致如下：
+
+```bash
+~/gdweb/blog % tree -a -I ".git" -F --gitignore
+./
+├── .gitignore
+├── .nojekyll
+└── docs/
+    ├── 404.html
+    ├── Gemfile
+    ├── Gemfile.lock
+    ├── _config.yml
+    ├── about.md
+    ├── docker-compose.yml
+    ├── index.md
+    ├── swug/
+    │   ├── index.md
+    │   └── vscode-mac.md
+    └── wsb/
+        ├── index.md
+        └── jekyll-local.md
+
+```
+
+**1、`.gitignore` 的内容如下：**
+```bash
+# Jekyll 生成的文件
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# 也不一定要忽略
+CNAME
+```
+
+**2、`.nojekyll`。要或不要，似乎没有什么影响。**
+
+**3、`docs/Gemfile` 的内容如下：**
+```bash
+# 要增加 source 否则本地编译时报错
+source "https://rubygems.org" 
+gem "github-pages", group: :jekyll_plugins
+```
+
+`gem "github-pages", group: :jekyll_plugins` 是复制了 github 上 Primer 主题的内容。在本地编译时要装一堆无关的 theme。尝试精减，但会报错。就这样子，只是 `docker compose up` 首次多花一些时间，后续再启动时也很快。
+
+**4、`docs/_config.yml` 内容如下：**
+```yml
+remote_theme: pages-themes/primer@v0.6.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+
+title: George Donne's Blog # 增加title 否则报错
+description: George Donne's Blog # 增加 description 否则报错
+repository: georgedonnev2/blog
+
+# 关键：指定源文件目录和输出目录
+# source: ./docs         # 从 docs 目录读取 markdown 文件
+# destination: ./_site   # 构建输出到 _site 目录
+baseurl: ""
+# url: "https://georgedonnev2.github.io"
+
+# 构建配置
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# 排除不需要的文件（本地构建时就不会生成到 destination[./_site] 目录中）
+exclude:
+  - docker-compose.yml
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - node_modules/
+  - .git/
+  - .github/
+
+# 可选：禁用 GitHub metadata 以避免错误
+# github: [metadata]  # 如果出现 metadata 错误可以启用
+
+# 禁用其他主题的自动安装
+# safe: true
+
+# 设置时区
+timezone: Asia/Shanghai
+```
+
+一点点试试。希望有个统一的 `_config.yml`，适用于 `georgedonnev2.github.io/blog` 和 CNAME 后的 `blog.georgedonne.cn`。当前的 `_config.yml`，在 `georgedonnev2.github.io/blog` 下的 `css` 有点不对，比如普通正文匹配到了 `p`，而不是期望的 `.markdown-body p`。后续再研究。
+
+
+
+**5、`docker-compose.yml` 文件内容如下：**
+```yml
+services:
+  jekyll:
+    image: jekyll/jekyll:latest
+    container_name: gdv2blog  # 容器名称
+    ports:
+      - "4000:4000"
+    volumes:
+      - ~/gdweb/blog/docs:/srv/jekyll
+    command: >
+      sh -c "
+      cd /srv/jekyll &&
+      jekyll build &&
+      jekyll serve --host 0.0.0.0 --watch --force_polling
+      "
+```
+
+也是一点点试。后续再好好研究。
+
+### 运行
+
+先切换到 docs 目录，再执行 docker-compose 命令。如下：
+```bash
+~/gdweb/blog % cd docs
+~/gdweb/blog/docs % docker compose up
+```
+
+<!--  -->
+## （不成功）使用 jekyll-primer-spec 主题
 
 更新 Gemfile
 ```bash
@@ -234,18 +377,8 @@ jekyll-1 exited with code 7
 终止。网络问题，无法访问 github page 228
 
 
-## 使用 primer 主题
-
-1、用docker-compose运行jekyll latest
-2、使用 primer 主题。不适用默认的minima主题
-3、docker的持久化目录在 ~/gdweb/blog。而不是日志在 ~/gdweb/blog
-4、本地可预览
-5、github pages上，仓库是 georgedonnev2/blog ，网站内容在 /docs
-6、最精简的配置，先跑起来。
-7、只有一个 index.md
-
 
 ## 参考资料
 
-- [2026最新零基础安装，10分钟学会跑本地AI/n8n/Ollama —— Docker Desktop 保姆级教学 —— 附汉化+国内镜像源](https://www.bilibili.com/video/BV1q7i9BTE4N)，B站，小in分享，2026-01-09
+[^1]: [2026最新零基础安装，10分钟学会跑本地AI/n8n/Ollama —— Docker Desktop 保姆级教学 —— 附汉化+国内镜像源](https://www.bilibili.com/video/BV1q7i9BTE4N)，B站，小in分享，2026-01-09
 
