@@ -1,0 +1,24 @@
+<!-- ./layouts/lodefault.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <!-- 引入 GitHub 官方的 Primer CSS，这已包含所有核心样式和代码高亮 -->
+    <link href="https://unpkg.com/@primer/css@^20.0.0/dist/primer.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-lg px-3 my-5 markdown-body">
+        <p>this is gdBlog</p>
+
+        {{ content }}
+
+        <footer>
+            © George Donne 2024-2026. All Rights Reserved. 苏ICP备2021027062号-1
+        </footer>
+    </div>
+
+</body>
+</html>

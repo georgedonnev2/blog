@@ -19,3 +19,8 @@ layout: default
 链接：[建站](./wsb/)
 
 - [基于 Docker 的 Jekyll 本地预览网站](./wsb/jekyll-local.md)
+
+## 测试
+
+- [Primer样式： The Primer theme](test-preadme.md)
+- [gh-readme样式： The Primer theme](test-layout.md)
